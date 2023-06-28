@@ -5,12 +5,13 @@ import axios from "axios";
 const schema = yup.object().shape({
     name: yup.string().required().min(2, 'name must be at least 2 characters!'),
     size: yup.string().oneOf(['1', '2', '3'], 'must select a size!'),
-    special: yup.string()
+    special: yup.string(),
+    pepperoni: yup.bool([true])
 })
 
 const Form = (props) => {
-    const [form, setForm] = useState({ name: '', size: '', topping: '', special: ''})
-    const [errors, setErrors] = useState({ name: '', size: '', topping: '', 
+    const [form, setForm] = useState({ name: '', size: '', topping1: false, special: ''})
+    const [errors, setErrors] = useState({ name: '', size: '', topping1: '', 
     special: ''})
     const [disabled, setDisabld] = useState(true)
 
@@ -29,10 +30,10 @@ const Form = (props) => {
 
     const submit = event => {
         event.preventDefault()
-        const newPizza = { name: form.name, size: form.size, topping: form.topping, special: form.special }
+        const newPizza = { name: form.name, size: form.size, topping1: form.topping1, special: form.special }
         axios.post('https://reqres.in/api/orders', newPizza)
             .then(res => {
-                setForm({ name: '', size: '', topping: '', special: ''})
+                setForm({ name: '', size: '', topping1: false, special: ''})
             })
             .catch(err => {
                 console.log(err)
@@ -46,7 +47,7 @@ const Form = (props) => {
     return (
         <div>
             <div style={{ color: 'red'}}>
-                <div>{errors.name}</div> <div>{errors.size}</div> <div>{errors.topping}</div> <div>{errors.special}</div>
+                <div>{errors.name}</div> <div>{errors.size}</div> <div>{errors.topping1}</div> <div>{errors.special}</div>
             </div>
             <form id="pizza-form" onSubmit={submit}>
                 <h1>Build Your Own Pizza!</h1>
@@ -63,7 +64,7 @@ const Form = (props) => {
                 </label>
                 <div>Add Toppings<br />
                     <label>Pepporoni
-                        <input type="checkbox" value={form.topping1} name="pepperoni" />
+                        <input onChange={change} type="checkbox" checked={form.topping1} name="pepperoni" />
                     </label>
                     <label>Bacon
                         <input type="checkbox" value={form.topping2} name="bacon" />
