@@ -13,7 +13,7 @@ const schema = yup.object().shape({
     topping5: yup.boolean()
 })
 
-const Form = (props) => {
+const Form = () => {
     const [form, setForm] = useState({ name: '', size: '', topping1: false, topping2: false, topping3: false, topping4: false, topping5: false, special: ''})
     const [errors, setErrors] = useState({ name: '', size: '', topping1: '', topping2: '', topping3: '', topping4: '', topping5: '', special: ''})
     const [disabled, setDisabld] = useState(true)
@@ -62,8 +62,8 @@ const Form = (props) => {
                 <label htmlFor="name-input">What is your name?
                     <input id="name-input" onChange={change} type="text" value={form.name} name="name" placeholder="Enter Name"/>
                 </label>
-                <label id="size-dropdown">Choice of Size
-                    <select onChange={change} value={form.size} name="size">
+                <label htmlFor="size-select" id="size-dropdown">Choice of Size
+                    <select onChange={change} value={form.size} name="size" id="size-select">
                         <option id="select-one" value="">--Select One--</option>
                         <option id="small" value="small">Small</option>
                         <option id="medium" value="medium">Medium</option>
@@ -89,7 +89,7 @@ const Form = (props) => {
                     
                 </div>
                 <label id="special-text">Special Instructions
-                    <input onChange={change} type="text" value={form.special} name="special"/>
+                    <input onChange={change} type="text" value={form.special} name="special" placeholder="Enter Instructions"/>
                 </label><br />
                 <button disabled={disabled} id="order-button">Add to Order</button>
             </form>
