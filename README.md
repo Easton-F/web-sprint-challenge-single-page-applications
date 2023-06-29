@@ -52,7 +52,7 @@ Your finished project must include all of the following requirements:
 - [X] A order form that has a "/pizza" route and shows the form
 - [X] A form with an id of "pizza-form"
 - [X] A name text input field with an id of "name-input"
-- [ ] Validation for name and the error message is "name must be at least 2 characters" (Use this exact error message to make sure tests pass) ::: VERY IMPORTANT TO USE THAT EXACT ERROR MESSAGE (casing included!)
+- [X] Validation for name and the error message is "name must be at least 2 characters" (Use this exact error message to make sure tests pass) ::: VERY IMPORTANT TO USE THAT EXACT ERROR MESSAGE (casing included!)
 - [X] A dropdown for pizza size with an id of "size-dropdown"
 - [X] A checklist for toppings - at least 4 (hint: name each separately!)
 - [X] Text input for special instructions with an id of "special-text"
