@@ -36,16 +36,23 @@ const Form = () => {
         console.log('Chang Form', form)
     }
 
-    const submit = event => {
-        event.preventDefault()
-        const newPizza = { name: form.name, size: form.size, topping1: form.topping1, topping2: form.topping2, topping3: form.topping3, topping4: form.topping4, topping5: form.topping5, special: form.special }
+    const submit = (newPizza) => {
+        console.log("the pizza", newPizza);
         axios.post('https://reqres.in/api/orders', newPizza)
             .then(res => {
+                console.log("res.data", res.data);
                 setForm({ name: '', size: '', topping1: false, topping2: false, topping3: false, topping4: false, topping5: false, special: ''})
             })
             .catch(err => {
                 console.log(err)
             })
+    }
+
+    const submitHandler = event => {
+        event.preventDefault()
+        const newPizza = { name: form.name, size: form.size, topping1: form.topping1, topping2: form.topping2, topping3: form.topping3, topping4: form.topping4, topping5: form.topping5, special: form.special }
+        console.log("the pizza", newPizza);
+        submit(newPizza);
     }
 
     useEffect(() => {
@@ -57,17 +64,25 @@ const Form = () => {
             <div style={{ color: 'red'}}>
                 <div>{errors.name}</div> <div>{errors.size}</div> <div>{errors.topping1}</div> <div>{errors.special}</div>
             </div>
-            <form id="pizza-form" onSubmit={submit}>
+            <form id="pizza-form" onSubmit={submitHandler}>
                 <h1>Build Your Own Pizza!</h1>
                 <label htmlFor="name-input">What is your name?
                     <input id="name-input" onChange={change} type="text" value={form.name} name="name" placeholder="Enter Name"/>
                 </label>
-                <label htmlFor="size-select" id="size-dropdown">Choice of Size
+                {/* <label htmlFor="size-select" id="size-dropdown">Choice of Size
                     <select onChange={change} value={form.size} name="size" id="size-select">
                         <option id="select-one" value="">--Select One--</option>
                         <option id="small" value="small">Small</option>
                         <option id="medium" value="medium">Medium</option>
                         <option id="large" value="large">Large</option>
+                    </select>
+                </label> */}
+                <label htmlFor="size-dropdown" >Choice of Size
+                    <select onChange={change} value={form.size} name="size" id="size-dropdown">
+                        <option  value="">--Select One--</option>
+                        <option  value="small">Small</option>
+                        <option  value="medium">Medium</option>
+                        <option  value="large">Large</option>
                     </select>
                 </label>
                 <div>Add Toppings<br />
